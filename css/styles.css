@@ -83,7 +83,7 @@ nav h1 a {
     display: inline;
 }
 
-/* Add a slash symbol (/) before/behind each list item */
+
 #breadcrumb li+li:before {
     padding: 8px;
     color: black;
@@ -255,7 +255,7 @@ nav h1 a {
   line-height: 1.1;
 }
 #restaurant-img {
-  width: 90%;
+  width: 50%;
 }
 #restaurant-address {
   font-size: 12pt;
@@ -271,7 +271,7 @@ nav h1 a {
   padding: 2px 0;
   text-align: center;
   text-transform: uppercase;
-	width: 90%;
+  width:50%;
 }
 #restaurant-container, #reviews-container {
   display: flex;
@@ -302,11 +302,12 @@ nav h1 a {
   list-style-type: none;
   margin: 0 0 30px;
   overflow: hidden;
-  padding: 0 20px 20px;
+  padding: 20px 20px;
   position: relative;
   width: 85%;
 }
 #reviews-list li p {
+  
   margin: 0 0 10px;
 }
 
