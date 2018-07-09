@@ -140,6 +140,8 @@ nav h1 a {
   margin: 0;
   padding: 30px 15px 60px;
   text-align: center;
+  display: flex;
+  flex-wrap: wrap;
 }
 #restaurants-list li {
   background-color: #fff;
@@ -306,11 +308,17 @@ nav h1 a {
 
 @media screen and (min-width:481px) and (max-width:600px)
 {
+  #restaurants-list li
+  {
+    width:calc(25% - 20px);
+  }
 
 }
 
-@media screen and (min-width:1000px)
+@media screen and (min-width:800px)  and (max-width:1000px)
 {
-
-
+  #restaurants-list li
+  {
+    width:calc(50% - 20px);
+  }
 }
