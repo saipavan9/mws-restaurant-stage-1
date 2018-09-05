@@ -3,7 +3,7 @@
   "short_name": "RR",
   "author": "Udacity, Sai Pavan Nunna",
   "theme_color": "#ffffff",
-  "background_color": "#F6F0E2",
+  "background_color": "#000000",
   "default_locale": "en",
   "display": "standalone",
   "Scope": "/",
