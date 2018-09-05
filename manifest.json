@@ -2,7 +2,7 @@
     "name": "Restaurant Reviews",
   "short_name": "RR",
   "author": "Udacity, Sai Pavan Nunna",
-  "theme_color": "#317EFB",
+  "theme_color": "#ffffff",
   "background_color": "#F6F0E2",
   "default_locale": "en",
   "display": "standalone",
