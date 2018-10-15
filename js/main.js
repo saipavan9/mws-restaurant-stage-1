@@ -158,7 +158,7 @@ const fillRestaurantsHTML = (restaurants = self.restaurants) => {
 /**
  * Add image lazyloading using IntersectionObserver
  */
-observer = new IntersectionObserver(entries => {
+const observer = new IntersectionObserver(entries => {
   for (const entry of entries) {
     if (!entry.isIntersecting) return;
     var targets = entry.target.childNodes;
@@ -183,7 +183,7 @@ const createRestaurantHTML = (restaurant) => {
   observer.observe(picture);
 
   const sourcewebp = document.createElement('source');
-  sourcewebp.setAttribute('data-srcset',`/source/img/${restaurant.id}.webp`);
+  sourcewebp.setAttribute('data-srcset',`img/${restaurant.id}.webp`);
   sourcewebp.setAttribute('type', 'image/webp');
   picture.appendChild(sourcewebp);
 

@@ -1,0 +1,17 @@
+/* ====================== Map ====================== */
+@import "../variables";
+@import "./listing";
+
+#map {
+  height: 0;
+  width: 100%;
+  background-color: $grey-light;
+  transition: all .5s ease;
+}
+
+#togglemap {
+	@extend .post-form-button;
+	max-width: 450px;
+	margin: 20px auto;
+	display: block;
+}

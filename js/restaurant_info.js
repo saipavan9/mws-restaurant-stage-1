@@ -1,6 +1,9 @@
 let restaurant;
-var newMap;
+var map;
 
+/**
+ * Initialize Google map, on user input.
+ */
 const mapToggle = () => {
   let theMap = document.getElementById('map');
   let toogleMapButton = document.getElementById('togglemap');
@@ -63,6 +66,7 @@ const fetchRestaurantFromURL = () => {
   });
 }
 
+
 /**
  * Create restaurant HTML and add it to the webpage
  */
@@ -77,7 +81,7 @@ const fillRestaurantHTML = (restaurant = self.restaurant) => {
   picture.className = 'restaurant-img';
   
   const sourcewebp = document.createElement('source');
-  sourcewebp.srcset = `/source/img/${restaurant.id}.webp`;
+  sourcewebp.srcset = `img/${restaurant.id}.webp`;
   sourcewebp.setAttribute('type', 'image/webp');
   picture.appendChild(sourcewebp);
 
@@ -305,7 +309,7 @@ const fillFavouritesHTML = (is_favorite) => {
  * Init
  */
 (()=> {
-  console.log('Restaurant Init!!!')
+  console.log('restaurant Init!!!')
   fetchRestaurantFromURL()
   .then((restaurant) => {
     fillBreadcrumb();
@@ -325,5 +329,6 @@ const fillFavouritesHTML = (is_favorite) => {
   })
   .catch((err) => {
     console.error('Init Error: ', err);
+    console.log(err);
   });
 })();

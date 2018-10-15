@@ -21,6 +21,7 @@ class DBHelper {
    */
   static checkStatus(response) {
     if (response.status === 200) {
+      console.log(status);
       return Promise.resolve(response)
     } else {
       return Promise.reject(new Error(`Request has failed. Return status: ${response.statusText}`))
@@ -28,17 +29,17 @@ class DBHelper {
   }
 
   /**
-   * Convert response to JSON data
+   * Convert response to JSON data.
    */
   static json(response) {
     return response.json()
   }
 
   /**
-   * Opens the IndexedDB
+   * Opens the IndexedDB.
    */
   static openDB() {
-      const dbPromise = idb.open('restaurantsDB', 3, upgradeDb => {
+    const dbPromise = idb.open('restaurantsDB', 1, upgradeDb => {
       switch (upgradeDb.oldVersion) {
         case 0:
           console.log('Creating IDB');
@@ -59,12 +60,11 @@ class DBHelper {
   }
 
   /**
-   * Get the Restaurants from the IDB
+   * Get the Restaurants from the IDB.
    */
   static getRestaurantsFromDB() {
     const restaurantsFromDB = DBHelper.openDB()
     .then( db => {
-      console.log('Getting Restaurants From DB');
       if(!db) return;
       let store = db.transaction('restaurants').objectStore('restaurants');
       return store.getAll();
@@ -73,10 +73,9 @@ class DBHelper {
   }
 
   /**
-   * Get the Restaurants from the Server API
+   * Get the Restaurants from the Server API.
    */
   static getRestaurantsFromAPI(){
-    console.log('Getting Restaurants From API');
     const restaurantsFromAPI = fetch(DBHelper.DATABASE_URL)
     .then(DBHelper.checkStatus)
     .then(DBHelper.json)
@@ -88,7 +87,7 @@ class DBHelper {
   }
 
   /**
-   * Save restaurant data to IDB
+   * Save restaurants data to IDB.
    */
   static saveRestaurants(data){
     return DBHelper.openDB().then(db => {
@@ -103,6 +102,7 @@ class DBHelper {
       console.log('Restaurants Saved')
     });
   }
+
   /**
    * Update restaurant data to IDB.
    */
@@ -211,7 +211,7 @@ class DBHelper {
    */
   static fetchNeighborhoods(callback) {
     // Fetch all restaurants
-   DBHelper.fetchRestaurants((error, restaurants) => {
+    DBHelper.fetchRestaurants((error, restaurants) => {
       if (error) {
         callback(error, null);
       } else {
@@ -264,8 +264,6 @@ class DBHelper {
       return `/build/img/${restaurant.id}-${imgWidth}.jpg`;
     }
     return `/build/img/${restaurant.id}-original.jpg`;
-
-    //return (`/img/${restaurant.photograph}`);
   }
 
   /**
@@ -280,20 +278,11 @@ class DBHelper {
     const imageSrcSet = `${widthXsmall} 360w, ${widthSmall} 520w, ${widthMedium} 800w, ${widthLarge} 1000w, ${widthOriginal} 1500w`;
     return imageSrcSet;
   }
+
   /**
    * Map marker for a restaurant.
    */
-  //  static mapMarkerForRestaurant(restaurant, map) {
-  //   // https://leafletjs.com/reference-1.3.0.html#marker  
-  //   const marker = new L.marker([restaurant.latlng.lat, restaurant.latlng.lng],
-  //     {title: restaurant.name,
-  //     alt: restaurant.name,
-  //     url: DBHelper.urlForRestaurant(restaurant)
-  //     })
-  //     marker.addTo(newMap);
-  //   return marker;
-  // } 
-   static mapMarkerForRestaurant(restaurant, map) {
+  static mapMarkerForRestaurant(restaurant, map) {
     const marker = new google.maps.Marker({
       position: restaurant.latlng,
       title: restaurant.name,
@@ -304,7 +293,7 @@ class DBHelper {
     return marker;
   }
 
-   /**
+  /**
    * Get the Reviews from the IDB.
    */
   static getReviewsFromDB() {
@@ -562,4 +551,3 @@ class DBHelper {
     })
   }
 }
-

@@ -1,0 +1,39 @@
+/* ====================== Layout ====================== */
+@import "./variables";
+
+#maincontent {
+  background-color: $main-bg;
+  min-height: 100%;
+}
+
+#footer {
+  background-color: $footer-bg;
+  color: $footer-copy;
+  font-size: 8pt;
+  letter-spacing: 1px;
+  padding: 25px;
+  text-align: center;
+  text-transform: uppercase;
+
+  a {
+  	color: $footer-link;
+  	&:hover,
+  	&:focus {
+  		color: $white;
+  	}
+  }
+}
+
+#offlinealert {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  margin: 0;
+  padding: 25px;
+  background: red;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  z-index: 9999;
+}

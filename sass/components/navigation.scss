@@ -1,0 +1,63 @@
+/* ====================== Navigation ====================== */
+@import "../variables";
+
+nav {
+  width: 100%;
+  padding: 30px 0;
+  background-color: $copy-dark;
+  text-align:center;
+
+  h1 {
+    margin: auto;
+  }
+
+  a {
+    color: $white;
+    font-size: 14pt;
+    font-weight: 200;
+    letter-spacing: 10px;
+    text-transform: uppercase;
+    transition: all .3s;
+
+    &:hover,
+    &:focus {
+      color: $highlight;
+    }
+  }
+
+  p {
+    margin: auto;
+  }
+}
+
+#breadcrumb {
+  padding: 10px 40px 16px;
+  list-style: none;
+  background-color: $highlight;
+  font-size: 17px;
+  margin: 0;
+
+  @media screen and (min-width: 681px) {
+    width: calc(50% - 80px);
+  }
+
+  li {
+    display: inline;
+
+    a {
+      color: $copy-dark;
+      text-decoration: underline;
+
+      &:hover,
+      &:focus {
+        color: $white;
+      }
+    }
+  }
+}
+
+#breadcrumb li+li:before {
+    padding: 8px;
+    color: $black;
+    content: "/\00a0";
+}

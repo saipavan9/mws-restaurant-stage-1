@@ -33,44 +33,48 @@
   <a href="#restaurant-filters" class="skip-link" tabindex="0">Skip to main content</a>
   <header>
     <nav>
-      <h1><a href="/">Restaurant Reviews</a></h1>
+      <h1><a href="/" tabindex="0">Restaurant Reviews</a></h1>
     </nav>
   </header>
 
   <main id="maincontent">
-    <section id="map-container" aria-label="Google map">
-        <div role="application" id="map" tabindex="0"></div>
-        <div>
-          <button id="togglemap" type="button" aria-pressed="false" aria-label="Display Map" onclick="mapToggle()">Display Map</button>
-        </div>
+    <section id="map-container">
+      <div role="application" id="map" tabindex="0"></div>
+      <div>
+        <button id="togglemap" type="button" aria-pressed="false" aria-label="Display Map" onclick="mapToggle()">Display Map</button>
+      </div>
     </section>
+
     <section>
-      <div class="filter-options" id="restaurent-filters">
+      <div class="filter-options" id="restaurant-filters">
         <h2>Filter Results</h2>
-        <div class="filter-select">
-          <label for="neighborhoods-select" aria-label="neighborhoods select">
+        <div>
+          <label for="neighborhoods-select">Select a neighborhood</label>
           <select id="neighborhoods-select" name="neighborhoods" onchange="updateRestaurants()" tabindex="0">
             <option value="all">All Neighborhoods</option>
           </select>
-        </label>  
-        <label for="cuisines-select" aria-label="cuisines select">
+        </div>
+        <div>
+          <label for="cuisines-select">Select restaurant type</label>
           <select id="cuisines-select" name="cuisines" onchange="updateRestaurants()" tabindex="0">
             <option value="all">All Cuisines</option>
           </select>
-        </label>
+        </div>
       </div>
-      </div>
-      <ul id="restaurants-list">
-      </ul>
+      <ul id="restaurants-list"></ul>
     </section>
   </main>
+
   <footer id="footer">
-    Copyright (c) 2018 <a href="/"><strong>Restaurant Reviews</strong></a> All Rights Reserved.
+    Copyright (c) 2018 <a href="/" tabindex="0"><strong>Restaurant Reviews</strong></a> All Rights Reserved.
   </footer>
-  <script type="application/javascript" charset="utf-8" src="build/js/dbhelper.js"></script>
-  <script type="application/javascript" charset="utf-8" src="build/js/main.js"></script>
+
+
+
   <script type="application/javascript" src="build/js/sw_registration.js"></script>
   <script type="application/javascript" src="build/js/idb.js"></script>
+  <script type="application/javascript" charset="utf-8" src="build/js/dbhelper.js"></script>
+  <script type="application/javascript" charset="utf-8" src="build/js/main.js"></script>
   <script defer src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
 </body>
 
