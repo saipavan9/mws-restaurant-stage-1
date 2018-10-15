@@ -30,27 +30,31 @@
 </head>
 
 <body>
+  <a href="#restaurant-filters" class="skip-link" tabindex="0">Skip to main content</a>
   <header>
     <nav>
       <h1><a href="/">Restaurant Reviews</a></h1>
     </nav>
   </header>
-  <a class="skip-main" href="#restaurants-list">Skip to main content</a>
+
   <main id="maincontent">
-    <section id="map-container" aria-label="Mapbox map">
-        <div id="map" role="application"></div>
+    <section id="map-container" aria-label="Google map">
+        <div role="application" id="map" tabindex="0"></div>
+        <div>
+          <button id="togglemap" type="button" aria-pressed="false" aria-label="Display Map" onclick="mapToggle()">Display Map</button>
+        </div>
     </section>
     <section>
-      <div class="filter-options">
+      <div class="filter-options" id="restaurent-filters">
         <h2>Filter Results</h2>
         <div class="filter-select">
           <label for="neighborhoods-select" aria-label="neighborhoods select">
-          <select id="neighborhoods-select" name="neighborhoods" onchange="updateRestaurants()">
+          <select id="neighborhoods-select" name="neighborhoods" onchange="updateRestaurants()" tabindex="0">
             <option value="all">All Neighborhoods</option>
           </select>
         </label>  
         <label for="cuisines-select" aria-label="cuisines select">
-          <select id="cuisines-select" name="cuisines" onchange="updateRestaurants()">
+          <select id="cuisines-select" name="cuisines" onchange="updateRestaurants()" tabindex="0">
             <option value="all">All Cuisines</option>
           </select>
         </label>
@@ -61,13 +65,13 @@
     </section>
   </main>
   <footer id="footer">
-    Copyright (c) 2017 <a href="/"><strong>Restaurant Reviews</strong></a> All Rights Reserved.
+    Copyright (c) 2018 <a href="/"><strong>Restaurant Reviews</strong></a> All Rights Reserved.
   </footer>
   <script type="application/javascript" charset="utf-8" src="build/js/dbhelper.js"></script>
   <script type="application/javascript" charset="utf-8" src="build/js/main.js"></script>
   <script type="application/javascript" src="build/js/sw_registration.js"></script>
   <script type="application/javascript" src="build/js/idb.js"></script>
-  <script defer src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initMap"></script>
+  <script defer src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
 </body>
 
 </html>

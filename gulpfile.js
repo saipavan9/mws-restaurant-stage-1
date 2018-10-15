@@ -61,7 +61,6 @@ gulp.task('styles', function(){
 gulp.task('scripts', function(){
   gulp.src(scriptRoot)
       .pipe(sourcemaps.init())
-      //.pipe(concat('main.js'))
       .pipe(babel({
           presets: ['env']
       }))

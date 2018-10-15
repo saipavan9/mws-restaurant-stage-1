@@ -71,17 +71,39 @@ document.addEventListener('DOMContentLoaded', (event) => {
 /**
  * Initialize Google map, called from HTML.
  */
-window.initMap = () => {
-  let loc = {
-    lat: 40.722216,
-    lng: -73.987501
-  };
-  self.map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 12,
-    center: loc,
-    scrollwheel: false
-  });
-  //updateRestaurants();
+const mapToggle = () =>{
+
+  let theMap = document.getElementById('map');
+  let toggleMapButton = document.getElementById('togglemap');
+  let buttonState = toggleMapButton.getAttribute('aria-pressed');
+  let pressed = 'false';
+  let labelText = 'Display Map';
+
+  if(buttonState == 'true'){
+    pressed = 'false';
+    labelText = 'Display map';
+    theMap.style.height = '0';
+    theMap.innerHTML = "";
+  }
+  else{
+    let loc = {
+      lat: 40.722216,
+      lng: -73.987501
+    };
+    self.map = new google.maps.Map(document.getElementById('map'),{
+      zoom: 12,
+      center: loc,
+      scrollwheel: false
+    });
+    pressed = 'true';
+    labelText = 'Hide map';
+    theMap.style.height = '400px';
+  }
+
+  toggleMapButton.setAttribute('aria-pressed',pressed);
+  toggleMapButton.setAttribute('aria-label',labelText);
+  toggleMapButton.innerHTML = labelText;
+  addMarkersToMap();
 }
 
 /**
@@ -134,17 +156,72 @@ const fillRestaurantsHTML = (restaurants = self.restaurants) => {
 }
 
 /**
+ * Add image lazyloading using IntersectionObserver
+ */
+observer = new IntersectionObserver(entries => {
+  for (const entry of entries) {
+    if (!entry.isIntersecting) return;
+    var targets = entry.target.childNodes;
+    for (const target of targets) {
+      target.setAttribute('srcset',target.getAttribute('data-srcset'));
+      if (target.tagName === 'IMG') {
+        target.setAttribute('src',target.getAttribute('data-srcset'));
+      }
+    }
+    observer.unobserve(entry.target);
+  }
+});
+
+/**
  * Create restaurant HTML.
  */
 const createRestaurantHTML = (restaurant) => {
   const li = document.createElement('li');
 
-  const image = document.createElement('img');
-  image.className = 'restaurant-img';
-  image.src = DBHelper.imageUrlForRestaurant(restaurant);
-  image.srcset = DBHelper.imageSrcSetForRestaurant(restaurant);
-  image.alt = `Image of ${restaurant.name} restaurant.`;
-  li.append(image);
+  const picture = document.createElement('picture');
+  li.appendChild(picture);
+  observer.observe(picture);
+
+  const sourcewebp = document.createElement('source');
+  sourcewebp.setAttribute('data-srcset',`/source/img/${restaurant.id}.webp`);
+  sourcewebp.setAttribute('type', 'image/webp');
+  picture.appendChild(sourcewebp);
+
+  const sourcexsmall = document.createElement('source');
+  sourcexsmall.setAttribute('media', '(min-width: 360px)');
+  sourcexsmall.setAttribute('data-srcset',DBHelper.imageUrlForRestaurant(restaurant, 'xsmall'));
+  sourcexsmall.setAttribute('type', 'image/jpeg');
+  picture.appendChild(sourcexsmall);
+
+  const sourcesmall = document.createElement('source');
+  sourcesmall.setAttribute('media', '(min-width: 520px)');
+  sourcesmall.setAttribute('data-srcset',DBHelper.imageUrlForRestaurant(restaurant, 'small'));
+  sourcesmall.setAttribute('type', 'image/jpeg');
+  picture.appendChild(sourcesmall);
+
+  const sourcemedium = document.createElement('source');
+  sourcemedium.setAttribute('media', '(min-width: 800px)');
+  sourcemedium.setAttribute('data-srcset',DBHelper.imageUrlForRestaurant(restaurant, 'medium'));
+  sourcemedium.setAttribute('type', 'image/jpeg');
+  picture.appendChild(sourcemedium);
+
+  const sourcelarge = document.createElement('source');
+  sourcelarge.setAttribute('media', '(min-width: 1000px)');
+  sourcelarge.setAttribute('data-srcset',DBHelper.imageUrlForRestaurant(restaurant, 'large'));
+  sourcelarge.setAttribute('type', 'image/jpeg');
+  picture.appendChild(sourcelarge);
+
+  const sourcedesk = document.createElement('source');
+  sourcedesk.setAttribute('media', '(min-width: 1500px)');
+  sourcedesk.setAttribute('data-srcset',`/build/img/${restaurant.id}-original.jpg`);
+  sourcedesk.setAttribute('type', 'image/jpeg');
+  picture.appendChild(sourcedesk);
+
+  const picimage = document.createElement('img');
+  picimage.className = 'restaurant-img';
+  picimage.setAttribute('data-srcset',`/build/img/${restaurant.id}-original.jpg`);
+  picimage.alt = `Image of ${restaurant.name} restaurant.`;
+  picture.appendChild(picimage);
 
   const name = document.createElement('h3');
   name.innerHTML = restaurant.name;
